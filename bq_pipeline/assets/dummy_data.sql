@@ -1,14 +1,14 @@
 /* @bruin
-name: dummy_users
+name: bruin.dummy_users
 type: bq.sql
 connection: gcp-default
 materialization:
   type: table
-  strategy: replace_table
+  strategy: create+replace
   partition_by: signup_date
-  cluster_by: 
+  cluster_by:
     - country
-*/
+@bruin */
 
 SELECT
   x AS id,
@@ -20,4 +20,3 @@ SELECT
     ELSE 'TR'
   END AS country
 FROM UNNEST(GENERATE_ARRAY(1, 100)) AS x
-
